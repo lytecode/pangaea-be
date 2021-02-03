@@ -1,6 +1,8 @@
+const axios = require('axios');
 const express = require('express');
-const redis = require('redis');
 const Joi = require('joi')
+const redis = require('redis');
+
 
 const app = express();
 const publisher = redis.createClient();
@@ -30,6 +32,22 @@ app.post('/publish/:topic', (req, res) => {
 
     publisher.publish(topic, JSON.stringify(body));
     res.status(201).json({ msg: `Message publised to '${topic}' topic` })
+});
+
+app.post('/subscribe/:topic', async (req, res) => {
+    const { topic } = req.params;
+    const { body } = req;
+
+    try {
+        await axios.get(body.url);
+    } catch (error) {
+        return res.status(400).json({ msg: "URL must start with http/https" })
+    }
+
+    res.status(200).json({
+        url: body.url,
+        topic
+    })
 })
 
 // Catch all non existent routes
