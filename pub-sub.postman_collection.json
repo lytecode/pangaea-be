@@ -1,0 +1,96 @@
+{
+	"info": {
+		"_postman_id": "dad60a10-d0ee-4f8e-a4ec-d07078bbacb3",
+		"name": "pub/sub",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "publisher",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"msg\": \"New iPhone 12 devices just arrived, come get yours\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/publish/order-available",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"publish",
+						"order-available"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Subscribe test2 to order-available",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"url\": \"http://localhost:9000/test2\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/subscribe/order-available",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"subscribe",
+						"order-available"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Subscribe test1 to notify-user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"url\": \"http://localhost:9000/test1\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/subscribe/notify-user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"subscribe",
+						"notify-user"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
